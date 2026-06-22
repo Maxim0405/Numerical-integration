@@ -24,7 +24,7 @@ f(x) = sin(x^2)
 Visual_Simp(f,0,pi/2,10^-6)
 Visual_GK(f,0,pi/2,10^-6)
 ```
-**Примеры визуализации**
+# Примеры визуализации
 <img width="591" height="394" alt="Simpson" src="https://github.com/user-attachments/assets/e517eaf8-415a-4431-b6e1-612ccd5c36a4" />
 <img width="600" height="400" alt="Gauss-Kron" src="https://github.com/user-attachments/assets/59084b97-1445-46f6-995b-e443617051bb" />
 
