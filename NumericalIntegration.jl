@@ -70,7 +70,7 @@ function Right_Visual(f,x_0,x_n,n)
         plot!([x_0 + i*h-h,x_0 + i*h-h],[0,f(x_0 + i*h)],color = :darkorange, linewidth = 2) 
         plot!([x_0 + i*h,x_0 + i*h + h],[0,0],color = :darkorange, linewidth = 2)
     end
-    plot!(f,x_0,x_n,title = "Метод правых прямоугольников",
+    plot!(f,x_0,x_n,title = "Right rectangle method",
     color = :darkgreen,linewidth = 3,grid = true)
     current()
 end
@@ -84,7 +84,7 @@ function Left_Visual(f,x_0,x_n,n)
         plot!([x_0 + i*h+h,x_0 + i*h+h],[0,f(x_0 + i*h)],color = :darkorange,linewidth = 2)
         plot!([x_0 + i*h,x_0 + i*h + h],[0,0],color = :darkorange,linewidth = 2)
     end
-    plot!(f,x_0,x_n,title = "Метод левых прямоугольников",
+    plot!(f,x_0,x_n,title = "Left rectangle method",
     color = :darkgreen,linewidth = 3,grid = true)
     current()
 end
@@ -99,7 +99,7 @@ function Central_Visual(f,x_0,x_n,n)
         plot!([j-h/2,j-h/2],[0,f(j)],color = :darkorange,linewidth = 2)
         plot!([j-h/2,j+h/2],[0,0],color = :darkorange,linewidth = 2) 
     end
-    plot!(f,x_0,x_n,title = "Метод центральных прямоугольников",
+    plot!(f,x_0,x_n,title = "Midpoint rectangle method",
     color = :darkgreen,linewidth = 3,grid = true)
     current()
 end
@@ -114,7 +114,7 @@ function Trap_Visual(f,x_0,x_n,n)
         plot!([j,j+h],[f(j),f(j+h)],color = :darkorange,linewidth = 2)
         plot!([j,j+h],[0,0],color = :darkorange,linewidth = 2)
     end
-    plot!(f,x_0,x_n,title = "Метод трапеций",
+    plot!(f,x_0,x_n,title = "Trapezoidal rule",
     color = :darkgreen,linewidth = 3,grid = true)
     current()
 end
@@ -126,9 +126,9 @@ function Visual_Simp(f,x_0,x_n,epsilon)
     x_points = unique(Segments_Ad_Simp)
     y_points = zeros(length(x_points))
     plot(f,x_0,x_n,color = :red,linewidth = 4,
-    title = " Адаптивный метод Симпсона",grid = true,
-    label = "Подыинтегральная ф-я")
-    scatter!(x_points,y_points,label = "Точки",color = :green)
+    title = "Adaptive Simpson's method",grid = true,
+    label = "integrand function")
+    scatter!(x_points,y_points,label = "points",color = :green)
 end
 
 function Visual_GK(f,x_0,x_n,epsilon)
@@ -137,10 +137,10 @@ function Visual_GK(f,x_0,x_n,epsilon)
     Adaptive_Gauss_Kronrod(f,x_0,x_n,epsilon)
     x_points = unique(Segments_GK)
     y_points = zeros(length(x_points))
-    plot(f,x_0,x_n, label = "Подыинтегральная ф-я",color = :blue,linewidth = 4,
-    title = " Адаптивный метод Гаусса-Кронрода",
+    plot(f,x_0,x_n, label = "integrand function",color = :blue,linewidth = 4,
+    title = "Adaptive Gauss–Kronrod method",
     grid = true)
-    scatter!(x_points,y_points,label = "Точки",color = :green)
+    scatter!(x_points,y_points,label = "points",color = :green)
 end
 
 const node_Kr = [-0.995657163025808080735527280689003
