@@ -25,14 +25,18 @@ julia example.jl
 f(x) = sin(x^2)
 Visual_Simp(f,0,pi/2,10^-6)
 Visual_GK(f,0,pi/2,10^-6)
-Trap_Visual(f,1,5,100)
-Central_Visual(f,1,5,40)
+Trap_Visual(f,0,pi/2,10)
+Central_Visual(f,0,pi/2,10)
 ```
 # Примеры визуализации
 <img width="591" height="394" alt="Simpson" src="https://github.com/user-attachments/assets/e517eaf8-415a-4431-b6e1-612ccd5c36a4" />
 <img width="600" height="400" alt="Gauss-Kron" src="https://github.com/user-attachments/assets/59084b97-1445-46f6-995b-e443617051bb" />
-<img width="584" height="389" alt="изображение" src="https://github.com/user-attachments/assets/46e4b94d-f2e9-45ca-85cb-540509c5af49" />
-<img width="584" height="389" alt="изображение" src="https://github.com/user-attachments/assets/0fdf140e-43ee-4218-972d-8026ffe0c0cc" />
+
+<img width="584" height="389" alt="изображение" src="https://github.com/user-attachments/assets/7ee3e203-859d-4a8b-98f3-0c153bf0e3ca" />
+
+<img width="584" height="389" alt="изображение" src="https://github.com/user-attachments/assets/a7984235-f930-4a17-8636-e9871ca54dc1" />
+
+
 
 
 
