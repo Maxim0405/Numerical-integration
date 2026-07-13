@@ -1,26 +1,25 @@
 # Numerical-integration
-Реализация различных методов численного интегрирования на языке Julia. Целью проекта является демонстрация и графическая визуализация методов численного интегрирования: от элементарных (методы Ньютона-Котеса) до продвинутых адаптивных методов. Код может быть полезен в академических целях.
-# Возможности проекта
-Реализовано:
-- Методы прямоугольников (левые,правые,центральные)
-- Метод трапеций
-- Метод Симпсона (адаптивный)
-- Адаптивный метод Гаусса-Кронрода (G15-K21)
-- Графическая визуализация всех реализованных методов
-# Использование
+Implementation of various numerical integration methods in Julia. The project aims to demonstrate and graphically visualise numerical integration techniques — from elementary (Newton–Cotes) to advanced adaptive methods. The code may be useful for academic purposes.
+# Features
+Implemented:
+- Rectangle methods (left, right, midpoint)
+- Trapezoidal rule
+- Adaptive Simpson's method
+- Adaptive Gauss–Kronrod (G15–K21)
+- Graphical visualisation for all implemented methods
+# Usage
 ```julia
 f(x) = exp(-x^2)
 Adaptive_Gauss_Kronrod(f, 0, 5, 1e-6)  # 0.8862269254514016
 ```
-# Тестирование
-Для ознакомления с проектом склонируйте репозиторий и перейдите в его папку. Запустите скрипт:
+# Testing
+To get familiar with the project, clone the repository and navigate to its folder. Run the script:
 ```bash
 julia example.jl
 ```
-# Визуализация  методов 
-Графическая демонстрация зависимости построения сетки адаптивными методами от поведения функции.
-Демонстрация методов Ньютона-Котеса
-Пример использования:
+# Visualisation
+Graphical demonstration of how adaptive methods refine the grid depending on the function behaviour, as well as illustrations for Newton–Cotes methods.
+Example usage:
 ```julia
 using Plots
 f(x) = sin(x^2)
@@ -29,7 +28,7 @@ Visual_GK(f,0,pi/2,10^-6)
 Trap_Visual(f,0,pi/2,10)
 Central_Visual(f,0,pi/2,10)
 ```
-# Примеры визуализации
+# Visualisation examples
 
 <img width="584" height="389" alt="изображение" src="https://github.com/user-attachments/assets/cb011291-66a8-49ab-ad19-603a02b1643d" />
 
@@ -44,9 +43,10 @@ Central_Visual(f,0,pi/2,10)
 
 
 
-# Структура
-- NumericalIntegration - код программы
-- example.jl - примеры 
+# Structure
+- NumericalIntegration - main code
+- example.jl -  examples
+- USAGE.MD - user documentation
 
 
 
