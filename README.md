@@ -30,14 +30,18 @@ Central_Visual(f,0,pi/2,10)
 ```
 # Visualisation examples
 
-<img width="584" height="389" alt="изображение" src="https://github.com/user-attachments/assets/cb011291-66a8-49ab-ad19-603a02b1643d" />
-
-<img width="584" height="389" alt="изображение" src="https://github.com/user-attachments/assets/e359da6b-5db2-4300-8b40-7ee4df411898" />
+<img width="584" height="389" alt="изображение" src="https://github.com/user-attachments/assets/b9ba24d8-875a-41e0-bc7e-ac4a834a4014" />
 
 
-<img width="584" height="389" alt="изображение" src="https://github.com/user-attachments/assets/7ee3e203-859d-4a8b-98f3-0c153bf0e3ca" />
+<img width="584" height="389" alt="изображение" src="https://github.com/user-attachments/assets/4bed6667-f985-4305-9237-bcd3de487b09" />
 
-<img width="584" height="389" alt="изображение" src="https://github.com/user-attachments/assets/a7984235-f930-4a17-8636-e9871ca54dc1" />
+
+
+<img width="584" height="389" alt="изображение" src="https://github.com/user-attachments/assets/7378f809-7760-4e63-9035-602b24dc8acc" />
+
+
+<img width="584" height="389" alt="изображение" src="https://github.com/user-attachments/assets/270608f4-87ef-4fe9-8468-abac8d815dae" />
+
 
 
 
