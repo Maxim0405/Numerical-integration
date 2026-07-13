@@ -1,0 +1,223 @@
+using Plots
+Segments_GK = Float64[]
+Segments_Ad_Simp = Float64[]
+
+function Right_Rectangle(f,x_0,x_n,n)
+    h = (x_n - x_0)/n
+    s = sum(f(x_0 + i*h) for i in 1:n)
+    return s*h
+end
+
+function Left_Rectangle(f,x_0,x_n,n)
+    h = (x_n - x_0)/n
+    s = sum(f(x_0 + i*h) for i in 0:n-1)
+    return s*h
+end
+
+function Central_Rectangle(f,x_0,x_n,n)
+    h = (x_n - x_0)/n
+    s = sum(f(x_0 + (i+0.5)*h) for i in 0:n-1)
+    return s*h
+end
+
+function Trapezoids(f,x_0,x_n,n)
+    h = (x_n - x_0)/n
+    k = (f(x_n)+f(x_0))/2 * h
+    s = sum(f(x_0 + i*h) for i in 1:n-1)
+    return s*h + k
+end
+
+function Adaptive_Simpson(f,x_0,x_n,epsilon; depth = 0, max_depth = 50)
+    global  Segments_Ad_Simp
+    h = x_n - x_0
+    m = (x_0 + x_n)/2
+    S = h/6 * (f(x_0) + 4*f((x_0 + x_n)/2) + f(x_n))
+    S_left = h/12 * (f(x_0) + 4*f((x_0 + m)/2) + f(m))
+    S_right = h/12 * (f(m) + 4*f((x_n + m)/2) + f(x_n))
+    E = abs(S_left + S_right - S)/15
+    if E < epsilon || depth >= max_depth
+         push!(Segments_Ad_Simp,x_0,x_n)
+        return S_left + S_right
+    else
+        left = Adaptive_Simpson(f,x_0,m,epsilon/2;depth=depth+1,max_depth=max_depth)
+        right = Adaptive_Simpson(f,m,x_n,epsilon/2;depth=depth+1,max_depth=max_depth)
+        return left + right
+    end
+end
+
+function Adaptive_Gauss_Kronrod(f,x_0,x_n,epsilon;depth = 0, max_depth = 50)
+global Segments_GK
+m = (x_n + x_0)/2
+G15 = (x_n - x_0)/2* sum(weight_G[i]*f((x_n - x_0)/2 * node_GS[i]+(x_0 + x_n)/2) for i in 1:15)
+K21 = (x_n - x_0)/2 * sum(weight_Kr[i]*f((x_n - x_0)/2 * node_Kr[i]+(x_0 + x_n)/2) for i in 1:21)
+E = abs(K21 - G15)
+if E < epsilon || depth >= max_depth
+    push!(Segments_GK,x_0,x_n)
+    return K21
+else
+    left = Adaptive_Gauss_Kronrod(f,x_0,m,epsilon/2;depth=depth+1,max_depth=max_depth)
+    right = Adaptive_Gauss_Kronrod(f,m,x_n,epsilon/2;depth=depth+1,max_depth=max_depth)
+    return left + right
+end
+end
+
+function Right_Visual(f,x_0,x_n,n)
+    plot()
+    h = (x_n - x_0)/n
+    for i in 1:n
+        plot!([x_0 + i*h, x_0 + i*h],[0,f(x_0 + i*h)],legend = false,color = :darkorange,linewidth = 2) 
+        plot!([x_0 + i*h,x_0 + i*h - h],[f(x_0 + i*h),f(x_0 + i*h)],color = :darkorange,linewidth = 2) 
+        plot!([x_0 + i*h-h,x_0 + i*h-h],[0,f(x_0 + i*h)],color = :darkorange, linewidth = 2) 
+        plot!([x_0 + i*h,x_0 + i*h + h],[0,0],color = :darkorange, linewidth = 2)
+    end
+    plot!(f,x_0,x_n,title = "Метод правых прямоугольников",
+    color = :darkgreen,linewidth = 3,grid = true)
+    current()
+end
+
+function Left_Visual(f,x_0,x_n,n)
+    plot()
+    h = (x_n - x_0)/n
+    for i in 0:n-1
+        plot!([x_0 + i*h,x_0 + i*h],[0,f(x_0 + i*h)],legend = false, color = :darkorange,linewidth = 2)
+        plot!([x_0 + i*h,x_0 + i*h+h],[f(x_0 + i*h),f(x_0 + i*h)],color = :darkorange,linewidth = 2)
+        plot!([x_0 + i*h+h,x_0 + i*h+h],[0,f(x_0 + i*h)],color = :darkorange,linewidth = 2)
+        plot!([x_0 + i*h,x_0 + i*h + h],[0,0],color = :darkorange,linewidth = 2)
+    end
+    plot!(f,x_0,x_n,title = "Метод левых прямоугольников",
+    color = :darkgreen,linewidth = 3,grid = true)
+    current()
+end
+
+function Central_Visual(f,x_0,x_n,n)
+    plot()
+    h = (x_n - x_0)/n
+    for i in 0:n-1
+        j = x_0 + (i+0.5)*h
+        plot!([j-h/2,j+h/2],[f(j),f(j)],legend = false, color = :darkorange,linewidth = 2) 
+        plot!([j+h/2,j+h/2],[0,f(j)],color = :darkorange,linewidth = 2)  
+        plot!([j-h/2,j-h/2],[0,f(j)],color = :darkorange,linewidth = 2)
+        plot!([j-h/2,j+h/2],[0,0],color = :darkorange,linewidth = 2) 
+    end
+    plot!(f,x_0,x_n,title = "Метод центральных прямоугольников",
+    color = :darkgreen,linewidth = 3,grid = true)
+    current()
+end
+
+function Trap_Visual(f,x_0,x_n,n)
+    h = (x_n - x_0)/n
+    plot()
+    for i in 0:n-1
+        j = x_0 + i*h
+        plot!([j,j],[0,f(j)],legend = false,color = :darkorange,linewidth = 2)
+        plot!([j+h,j+h],[0,f(j+h)],color = :darkorange,linewidth = 2)
+        plot!([j,j+h],[f(j),f(j+h)],color = :darkorange,linewidth = 2)
+        plot!([j,j+h],[0,0],color = :darkorange,linewidth = 2)
+    end
+    plot!(f,x_0,x_n,title = "Метод трапеций",
+    color = :darkgreen,linewidth = 3,grid = true)
+    current()
+end
+
+function Visual_Simp(f,x_0,x_n,epsilon)
+    global Segments_Ad_Simp
+    empty!(Segments_Ad_Simp)
+    Adaptive_Simpson(f,x_0,x_n,epsilon)
+    x_points = unique(Segments_Ad_Simp)
+    y_points = zeros(length(x_points))
+    plot(f,x_0,x_n,color = :red,linewidth = 4,
+    title = " Адаптивный метод Симпсона",grid = true,
+    label = "Подыинтегральная ф-я")
+    scatter!(x_points,y_points,label = "Точки",color = :green)
+end
+
+function Visual_GK(f,x_0,x_n,epsilon)
+    global Segments_GK
+    empty!(Segments_GK)
+    Adaptive_Gauss_Kronrod(f,x_0,x_n,epsilon)
+    x_points = unique(Segments_GK)
+    y_points = zeros(length(x_points))
+    plot(f,x_0,x_n, label = "Подыинтегральная ф-я",color = :blue,linewidth = 4,
+    title = " Адаптивный метод Гаусса-Кронрода",
+    grid = true)
+    scatter!(x_points,y_points,label = "Точки",color = :green)
+end
+
+const node_Kr = [-0.995657163025808080735527280689003
+-0.973906528517171720077964012084452
+-0.930157491355708226001207180059508
+-0.865063366688984510732096688423493
+-0.780817726586416897063717578345042
+-0.679409568299024406234327365114874
+-0.562757134668604683339000099272694
+-0.433395394129247190799265943165784
+-0.294392862701460198131126603103866
+-0.148874338981631210884826001129720
+ 0.000000000000000000000000000000000
+ 0.148874338981631210884826001129720
+ 0.294392862701460198131126603103866
+ 0.433395394129247190799265943165784
+ 0.562757134668604683339000099272694
+ 0.679409568299024406234327365114874
+ 0.780817726586416897063717578345042
+ 0.865063366688984510732096688423493
+ 0.930157491355708226001207180059508
+ 0.973906528517171720077964012084452
+ 0.995657163025808080735527280689003]
+
+ const weight_Kr = [0.011694638867371874278064396062192
+0.032558162307964727478818972459390
+0.054755896574351996031381300244580
+0.075039674810919952767043140916190
+0.093125454583697605535065465083366
+0.109387158802297641899210590325805
+0.123491976262065851077958109831074
+0.134709217311473325928054001771707
+0.142775938577060080797094273138717
+0.147739104901338491374841515972068
+0.149445554002916905664936468389821 
+0.147739104901338491374841515972068
+0.142775938577060080797094273138717
+0.134709217311473325928054001771707
+0.123491976262065851077958109831074
+0.109387158802297641899210590325805
+0.093125454583697605535065465083366
+0.075039674810919952767043140916190
+0.054755896574351996031381300244580
+0.032558162307964727478818972459390
+0.011694638867371874278064396062192]
+
+ const weight_G =[
+  0.03075324199683327,
+  0.07036604748810812,
+  0.10715922046717194,
+  0.13957067792615432,
+  0.16626920581699392,
+  0.1861610000155622,
+  0.1984314853271115,
+  0.2025782419255613,
+  0.1984314853271115,
+  0.1861610000155622,
+  0.16626920581699392,
+  0.13957067792615432,
+  0.10715922046717194,
+  0.07036604748810812,
+  0.03075324199683327]
+
+ const  node_GS = [
+ -0.9879925180204854,
+ -0.9372733924007060,
+ -0.8482065834104272,
+ -0.7244177313601701,
+ -0.5709721726085388,
+ -0.3941513470775634,
+ -0.20119409399743452,
+  0.0,
+  0.20119409399743452,
+  0.3941513470775634,
+  0.5709721726085388,
+  0.7244177313601701,
+  0.8482065834104272,
+  0.9372733924007060,
+  0.9879925180204854
+]
