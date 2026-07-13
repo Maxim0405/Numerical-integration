@@ -10,7 +10,7 @@
 # Использование
 ```julia
 f(x) = exp(-x^2)
-Adaptive_Gaus_Kronrod(f, 0, 5, 1e-6)  # 0.8862269254514016
+Adaptive_Gauss_Kronrod(f, 0, 5, 1e-6)  # 0.8862269254514016
 ```
 # Тестирование
 Для ознакомления с проектом склонируйте репозиторий и перейдите в его папку. Запустите скрипт:
@@ -22,6 +22,7 @@ julia example.jl
 Демонстрация методов Ньютона-Котеса
 Пример использования:
 ```julia
+using Plots
 f(x) = sin(x^2)
 Visual_Simp(f,0,pi/2,10^-6)
 Visual_GK(f,0,pi/2,10^-6)
@@ -45,7 +46,7 @@ Central_Visual(f,0,pi/2,10)
 
 # Структура
 - NumericalIntegration - код программы
-- example.jl - тесты
+- example.jl - примеры 
 
 
 
