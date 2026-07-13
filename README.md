@@ -29,8 +29,11 @@ Trap_Visual(f,0,pi/2,10)
 Central_Visual(f,0,pi/2,10)
 ```
 # Примеры визуализации
-<img width="591" height="394" alt="Simpson" src="https://github.com/user-attachments/assets/e517eaf8-415a-4431-b6e1-612ccd5c36a4" />
-<img width="600" height="400" alt="Gauss-Kron" src="https://github.com/user-attachments/assets/59084b97-1445-46f6-995b-e443617051bb" />
+
+<img width="584" height="389" alt="изображение" src="https://github.com/user-attachments/assets/cb011291-66a8-49ab-ad19-603a02b1643d" />
+
+<img width="584" height="389" alt="изображение" src="https://github.com/user-attachments/assets/e359da6b-5db2-4300-8b40-7ee4df411898" />
+
 
 <img width="584" height="389" alt="изображение" src="https://github.com/user-attachments/assets/7ee3e203-859d-4a8b-98f3-0c153bf0e3ca" />
 
