@@ -1,6 +1,6 @@
 using Plots
-Segments_GK = Float64[]
-Segments_Ad_Simp = Float64[]
+const Segments_GK = Float64[]
+const Segments_Ad_Simp = Float64[]
 
 function Right_Rectangle(f,x_0,x_n,n)
     h = (x_n - x_0)/n
@@ -123,8 +123,8 @@ function Visual_Simp(f,x_0,x_n,epsilon)
     global Segments_Ad_Simp
     empty!(Segments_Ad_Simp)
     Adaptive_Simpson(f,x_0,x_n,epsilon)
-    x_points = unique(Segments_Ad_Simp)
-    y_points = zeros(length(x_points))
+    x_points ::Vector{Float64} = unique(Segments_Ad_Simp)
+    y_points ::Vector{Float64} = zeros(length(x_points))
     plot(f,x_0,x_n,color = :red,linewidth = 4,
     title = "Adaptive Simpson's method",grid = true,
     label = "integrand function")
@@ -135,8 +135,8 @@ function Visual_GK(f,x_0,x_n,epsilon)
     global Segments_GK
     empty!(Segments_GK)
     Adaptive_Gauss_Kronrod(f,x_0,x_n,epsilon)
-    x_points = unique(Segments_GK)
-    y_points = zeros(length(x_points))
+     x_points ::Vector{Float64} = unique(Segments_GK )
+    y_points ::Vector{Float64} = zeros(length(x_points))
     plot(f,x_0,x_n, label = "integrand function",color = :blue,linewidth = 4,
     title = "Adaptive Gauss–Kronrod method",
     grid = true)
