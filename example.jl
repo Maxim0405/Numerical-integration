@@ -17,7 +17,7 @@ println("Adaptive Simpson's method with error tolerance ϵ = 10^-6: $(Adaptive_S
 println("-"^50)
 println("Adaptive Gauss–Kronrod method with error tolerance ϵ = 10^-6: $(Adaptive_Gauss_Kronrod(f,0,1,10^-6))")
 println("="^50)
-println("Tests of the Gauss–Kronrod method (G15–K21) on various functions with ϵ = 10^-6")
+println("Tests of the Gauss–Kronrod method (G10–K21) on various functions with ϵ = 10^-6")
 println("="^50)
 f1(x) = exp(x)*cos(2*x)
 println("∫(exp(x)*cos(2*x),0,10) = $(Adaptive_Gauss_Kronrod(f1,0,10,10^-6))")
