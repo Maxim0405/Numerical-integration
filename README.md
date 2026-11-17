@@ -5,7 +5,7 @@ Implemented:
 - Rectangle methods (left, right, midpoint)
 - Trapezoidal rule
 - Adaptive Simpson's method
-- Adaptive Gauss–Kronrod (G15–K21)
+- Adaptive Gauss–Kronrod (G10–K21)
 - Graphical visualisation for all implemented methods
 # Usage
 ```julia
